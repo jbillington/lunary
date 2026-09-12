@@ -1,0 +1,45 @@
+# The Night Garden — M1 skeleton
+
+Playtest simulation of the Night Garden ritual card game.
+Spec: `../../the-night-garden.md`
+
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run typecheck
+```
+
+## What's here (M1)
+
+- **F1 (partial)** — content pack: all 10 Planets, all 12 Itches, **3 of 16 Spirits**.
+  The three (Cartographer, Lighthouse, Seedkeeper) are fully authored with per-phase
+  lines so the ceremony can be played end to end.
+- **F2** — projects, zones, phase track with legality enforced.
+- **F3** — the Invocation stepper: Prepare → Review → Move → Divine → Close.
+- **F6** — persistence (localStorage; see deviation below).
+- **In-app tutorial** — "How to play" as a docked side panel; the board yields the
+  space rather than being covered, so you can read and look at once.
+
+## Rules the code actually enforces
+
+| Rule | Where |
+|---|---|
+| Hands Limit — 3 tended beds | `store.ts` (`adoptSlip`, `moveZone`), `lib/rules.ts` |
+| Phases forward/sideways only; Resting→Waxing is the wake | `lib/rules.ts` `canMoveTo` |
+| No-Repeat — same Spirit can't come twice running | `lib/rules.ts` `availableSpirits` |
+| The Rerule — 1 voluntary redraw, third draw kept | `MAX_DRAWS`, stepper `roll()` |
+| Chronicle is append-only | `store.ts` `appendChronicle` |
+| Invitation scheduled on the spirit's planetary day | `nextDayOccurrence` |
+
+## Deviations from the PRD
+
+- **localStorage instead of idb-keyval.** Same guarantees at this data size, one fewer
+  dependency. Swap when the chronicle outgrows ~5MB.
+- **Spirit deck is 3 cards.** Deliberate — the point of M1 is testing whether the
+  *ritual* holds, which 3 cards test as well as 16. The No-Repeat filter has a guard so
+  a tiny deck can't empty the pool.
+
+## Not yet built
+
+Communion stepper (F4) · cycle history view (F7) · once-per-cycle Itch limit
+(the button currently redraws freely) · telemetry (F10) · Deep Reading · Long Night.

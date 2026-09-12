@@ -1,0 +1,257 @@
+:root {
+  --night: #0d1020;
+  --night-2: #151a32;
+  --bed: #1b2140;
+  --ink: #e8e4d8;
+  --ink-dim: #9a9bb5;
+  --cream: #f2ead8;
+  --indigo: #5b5fd6;
+  --violet: #9b6fd6;
+  --dusk: #d6779b;
+  --gold: #e3b23c;
+  --moss: #6fae82;
+  --edge: #2a3157;
+  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --panel-w: 380px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, #23285010, transparent),
+    radial-gradient(circle at 15% 10%, #ffffff08 0 1px, transparent 1px),
+    var(--night);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--bed);
+  border: 1px solid var(--edge);
+  border-radius: 6px;
+  padding: 0.5rem 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+button:hover:not(:disabled) { background: #232a52; border-color: var(--indigo); }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+button.primary { background: var(--indigo); border-color: var(--indigo); color: #fff; }
+button.primary:hover:not(:disabled) { background: #6b6fe6; }
+button.ghost { background: transparent; }
+
+input, textarea {
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: #0b0e1c;
+  border: 1px solid var(--edge);
+  border-radius: 6px;
+  padding: 0.5rem 0.7rem;
+  width: 100%;
+}
+input:focus, textarea:focus { outline: none; border-color: var(--violet); }
+
+.app {
+  max-width: 1200px; margin: 0 auto; padding: 1.5rem 1.25rem 5rem;
+  transition: padding-right 0.28s cubic-bezier(.2,.8,.3,1);
+}
+/* The panel is docked, not overlaid — the board gives up the space. */
+.app.with-panel {
+  max-width: none; margin: 0;
+  padding-right: calc(var(--panel-w) + 1.25rem);
+}
+
+header.sky {
+  display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+  padding-bottom: 1rem; border-bottom: 1px solid var(--edge); margin-bottom: 1.5rem;
+}
+header.sky h1 { font-size: 1.5rem; margin: 0; letter-spacing: 0.06em; font-weight: 500; }
+header.sky .moon { font-size: 1.4rem; }
+header.sky .meta { color: var(--ink-dim); font-size: 0.85rem; }
+header.sky .spacer { flex: 1; }
+
+.principle {
+  font-style: italic; color: var(--cream); text-align: center;
+  border-left: 2px solid var(--gold); border-right: 2px solid var(--gold);
+  padding: 1rem 1.5rem; margin: 0 auto 1.75rem; max-width: 640px;
+}
+
+/* ---- The mat ----
+   auto-fit so the zones reflow whether the squeeze comes from a small viewport
+   or from the docked side panel taking its share. */
+.mat {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  gap: 0.9rem;
+}
+
+.zone {
+  background: linear-gradient(180deg, var(--night-2), #11142a);
+  border: 1px solid var(--edge); border-radius: 10px;
+  padding: 0.8rem; min-height: 260px;
+}
+.zone.garden { border-color: #35406f; background: linear-gradient(180deg, var(--bed), #141a36); }
+.zone h2 { font-size: 0.85rem; margin: 0 0 0.15rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+.zone .blurb { font-size: 0.72rem; color: var(--ink-dim); margin-bottom: 0.8rem; font-style: italic; }
+.zone .count { float: right; color: var(--ink-dim); font-size: 0.75rem; }
+
+/* ---- Project cards ---- */
+.pcard {
+  background: var(--cream); color: #22202c;
+  border-radius: 7px; padding: 0.6rem 0.7rem; margin-bottom: 0.6rem;
+  box-shadow: 0 3px 10px #0006; cursor: pointer; border: none; width: 100%; text-align: left;
+  font-family: var(--serif);
+}
+.pcard:hover { background: #fff8e9; }
+.pcard .name { font-weight: 600; font-size: 0.95rem; }
+.pcard .purpose { font-size: 0.76rem; color: #5c5768; line-height: 1.35; }
+.pcard .row { display: flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem; font-size: 0.72rem; color: #6b6578; }
+.pcard .stars { color: #b8860b; letter-spacing: -1px; }
+
+.slip {
+  background: #1a1f3d; border: 1px dashed #3d4570; border-radius: 5px;
+  padding: 0.45rem 0.6rem; margin-bottom: 0.5rem; font-size: 0.82rem;
+}
+.slip .one { font-size: 0.72rem; color: var(--ink-dim); }
+.slip .acts { display: flex; gap: 0.35rem; margin-top: 0.4rem; }
+.slip button { padding: 0.2rem 0.5rem; font-size: 0.72rem; }
+
+.empty { color: #4d5478; font-size: 0.78rem; font-style: italic; text-align: center; padding: 1.5rem 0.5rem; }
+
+/* ---- Ritual ---- */
+.ritual {
+  position: fixed; inset: 0; z-index: 50; overflow-y: auto;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, #2a1f0f55, transparent 70%),
+    #080a16f5;
+  backdrop-filter: blur(3px);
+  display: flex; justify-content: center; padding: 2rem 1rem 4rem;
+}
+.ritual-inner { max-width: 700px; width: 100%; }
+.candle { text-align: center; font-size: 2rem; margin-bottom: 0.25rem; filter: drop-shadow(0 0 14px #e3b23c88); }
+.steps { display: flex; justify-content: center; gap: 0.4rem; margin-bottom: 1.5rem; }
+.steps span { width: 26px; height: 3px; border-radius: 2px; background: var(--edge); }
+.steps span.on { background: var(--gold); }
+.steps span.done { background: #6b5a2a; }
+
+.ritual h2 { font-weight: 500; letter-spacing: 0.05em; text-align: center; margin: 0 0 0.3rem; }
+.ritual .sub { text-align: center; color: var(--ink-dim); font-size: 0.85rem; margin-bottom: 1.75rem; }
+.ritual .actions { display: flex; gap: 0.6rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
+
+.panel {
+  background: #11142acc; border: 1px solid var(--edge);
+  border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: 1rem;
+}
+.panel h3 { margin: 0 0 0.5rem; font-size: 0.95rem; font-weight: 600; }
+.panel .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--ink-dim); margin-bottom: 0.25rem; }
+.field { margin-bottom: 0.9rem; }
+
+/* ---- Deck cards (planet / spirit / itch) ---- */
+.deck-row { display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.25rem; }
+
+.gcard {
+  width: 210px; min-height: 320px; border-radius: 11px; padding: 1rem 0.9rem;
+  display: flex; flex-direction: column; box-shadow: 0 6px 24px #0008;
+  animation: reveal 0.45s cubic-bezier(.2,.8,.3,1) both;
+}
+@keyframes reveal {
+  from { opacity: 0; transform: rotateY(-25deg) translateY(12px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+.gcard.planet { background: linear-gradient(165deg, #2b2f6e, #171a3d); border: 1px solid #4a50a8; }
+.gcard.spirit { background: linear-gradient(165deg, #4a2f6e, #26163d); border: 1px solid #8a5fc0; }
+.gcard.itch   { background: linear-gradient(165deg, #6e2f4a, #3d1626); border: 1px solid #c06f92; }
+
+.gcard .sigil { font-size: 2.6rem; text-align: center; line-height: 1.1; }
+.gcard .title { text-align: center; font-size: 1.05rem; margin: 0.3rem 0 0.1rem; }
+.gcard .kind { text-align: center; font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: #ffffff77; margin-bottom: 0.7rem; }
+.gcard .body { font-size: 0.8rem; line-height: 1.45; }
+.gcard .body dt { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: #ffffff88; margin-top: 0.55rem; }
+.gcard .body dd { margin: 0.1rem 0 0; }
+.gcard .day { margin-top: auto; padding-top: 0.7rem; text-align: center; font-size: 0.72rem; color: #ffffffaa; border-top: 1px solid #ffffff22; }
+
+.stateline {
+  background: #1a1330; border: 1px solid #6b4a9e; border-left: 3px solid var(--violet);
+  border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1.1rem;
+}
+.stateline .who { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--violet); margin-bottom: 0.3rem; }
+.stateline p { margin: 0; font-size: 1.02rem; color: var(--cream); }
+
+.chronicle-line {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem; color: var(--moss);
+  background: #0b0e1c; border: 1px solid var(--edge); border-radius: 6px;
+  padding: 0.55rem 0.7rem; word-break: break-word;
+}
+
+.chronicle-list { list-style: none; margin: 0; padding: 0; }
+.chronicle-list li {
+  font-size: 0.8rem; padding: 0.45rem 0; border-bottom: 1px solid var(--edge);
+  display: flex; gap: 0.7rem;
+}
+.chronicle-list li:last-child { border-bottom: none; }
+.chronicle-list .c { color: var(--gold); flex-shrink: 0; font-size: 0.72rem; padding-top: 0.15rem; }
+
+.phase-track { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+.phase-track button { padding: 0.3rem 0.6rem; font-size: 0.78rem; }
+.phase-track button.cur { background: var(--moss); border-color: var(--moss); color: #0b1a10; }
+.phase-track button.illegal { display: none; }
+
+.warn { color: var(--dusk); font-size: 0.8rem; text-align: center; }
+.hint { color: var(--ink-dim); font-size: 0.78rem; }
+.sealed { color: var(--gold); }
+
+.drawer { position: fixed; inset: 0; z-index: 40; background: #06080f; overflow-y: auto; padding: 2rem 1.25rem 4rem; }
+.drawer-inner { max-width: 720px; margin: 0 auto; }
+
+/* ---- Side panel (docked) ---- */
+.sidepanel {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 45;
+  width: var(--panel-w);
+  display: flex; flex-direction: column;
+  background: linear-gradient(180deg, var(--night-2), #0f1226);
+  border-left: 1px solid var(--edge);
+  animation: slide-in 0.3s cubic-bezier(.2,.8,.3,1) both;
+}
+@keyframes slide-in { from { transform: translateX(30px); opacity: 0 } to { transform: none; opacity: 1 } }
+
+.sidepanel-head {
+  display: flex; align-items: baseline; gap: 0.75rem;
+  padding: 1.1rem 1.1rem 0.9rem;
+  border-bottom: 1px solid var(--edge);
+  background: #0f1226ee;
+}
+.sidepanel-head h2 { margin: 0; font-weight: 500; font-size: 1.2rem; letter-spacing: 0.03em; }
+.sidepanel-head button { padding: 0.35rem 0.7rem; font-size: 0.85rem; }
+
+.sidepanel-body { overflow-y: auto; padding: 1rem 1.1rem 3rem; }
+.sidepanel-body .panel { padding: 0.95rem 1rem; margin-bottom: 0.85rem; }
+
+/* Too narrow to dock — overlay instead of strangling the board. */
+@media (max-width: 900px) {
+  .app.with-panel { padding-right: 1.25rem; }
+  .sidepanel { width: min(var(--panel-w), 92vw); box-shadow: -24px 0 70px #000c; }
+}
+
+/* ---- Tutorial type scale ---- */
+.tutorial { font-size: 1.06rem; line-height: 1.62; }
+.tutorial .panel p { margin: 0 0 0.85rem; font-size: 1.04rem; }
+.tutorial .panel p:last-child { margin-bottom: 0; }
+.tutorial .panel h3 { color: var(--cream); font-size: 1.18rem; margin-bottom: 0.8rem; }
+.tutorial .hint { font-size: 0.97rem; }
+.tutorial strong { color: var(--cream); font-weight: 600; }
+.tutorial em { color: var(--ink-dim); }
+
+.tut-list { margin: 0; padding-left: 1.2rem; font-size: 1.04rem; }
+.tut-list li { margin-bottom: 0.7rem; }
+.tut-list li:last-child { margin-bottom: 0; }
+ol.tut-list li::marker { color: var(--gold); font-size: 0.95rem; }
+ul.tut-list li::marker { color: var(--violet); }
