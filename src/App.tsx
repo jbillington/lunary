@@ -51,8 +51,8 @@ export default function App() {
       </header>
 
       <p className="principle">
-        Every idea is a seed; every project a season.
-        Tend what the moon favors. Let each project become more itself.
+        Every idea is a seed. Tend what the moon favors.
+        Let each project become more itself.
       </p>
 
       <Mat onOpen={setOpen} />

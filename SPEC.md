@@ -4,8 +4,8 @@
 **One file containing:** Game Description · Rulebook · User Manual with Example of Play · Product Requirements Document
 **Version 1.0 · September 2026**
 
-> *"Every idea is a seed; every project a season.*
-> *Tend what the moon favors. Let each project become more itself."*
+> *"Every idea is a seed. Tend what the moon favors.*
+> *Let each project become more itself."*
 
 **On the name.** A *lunary* (Latin *lunarium*, also "moonbook") is a real medieval genre:
 a book of prognostication organized by the thirty days of the moon's cycle, telling the
@@ -323,9 +323,8 @@ were playing. Times shown are the recommended ceremony length.*
 
 > **Step 1.** Light the candle. Same spot, same candle, every cycle.
 >
-> **Step 2.** Read the Principle card aloud: *"Nothing dies here. Every idea is a seed;
-> every project a season. Tend what the moon favors. Let each project become more
-> itself."*
+> **Step 2.** Read the Principle card aloud: *"Every idea is a seed. Tend what the
+> moon favors. Let each project become more itself."*
 >
 > **Step 3.** Review the garden. All three projects sit at 🌑 Seed — first cycle, no
 > moonpennies yet. All three beds are tended (3 = the Hands Limit, exactly full).
@@ -623,8 +622,8 @@ static files.
 
 # APPENDIX A — QUICK REFERENCE CARD
 
-> **The Principle:** *Nothing dies here. Every idea is a seed; every project a season.
-> Tend what the moon favors. Let each project become more itself.*
+> **The Principle:** *Every idea is a seed. Tend what the moon favors.
+> Let each project become more itself.*
 
 **Order of play (each new moon):** Prepare → Read Principle → Review garden → Move
 (wake/rest/advance/adopt) → Divine per tended project (Planet + Spirit, rerule, no

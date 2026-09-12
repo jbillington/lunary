@@ -9,8 +9,8 @@ import { PlanetCard, SpiritCard } from './GameCard'
 import { moonGlyph, moonName, moonPhase } from '../lib/moon'
 
 const PRINCIPLE =
-  'Every idea is a seed; every project a season. ' +
-  'Tend what the moon favors. Let each project become more itself.'
+  'Every idea is a seed. Tend what the moon favors. ' +
+  'Let each project become more itself.'
 
 type Step = 'prepare' | 'review' | 'move' | 'divine' | 'close'
 const STEPS: Step[] = ['prepare', 'review', 'move', 'divine', 'close']
