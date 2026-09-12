@@ -4,16 +4,22 @@ import { Mat } from './components/Mat'
 import { ProjectDetail } from './components/ProjectDetail'
 import { InvocationStepper } from './components/InvocationStepper'
 import { Tutorial } from './components/Tutorial'
+import { Moonbook } from './components/Moonbook'
 import { daysToNewMoon, moonGlyph, moonName, moonPhase } from './lib/moon'
 import { isoDate, prettyDate } from './lib/rules'
+import { timeline } from './lib/history'
+
+type Panel = 'tutorial' | 'moonbook' | null
 
 export default function App() {
   const { projects, cycles, activeCycle, addSlip, beginInvocation } = useGarden()
   const [open, setOpen] = useState<string | null>(null)
   const [ritual, setRitual] = useState(false)
-  const [tutorial, setTutorial] = useState(false)
+  const [panel, setPanel] = useState<Panel>(null)
   const [slipName, setSlipName] = useState('')
   const [slipLine, setSlipLine] = useState('')
+
+  const readingCount = timeline(cycles, activeCycle).length
 
   const phase = moonPhase()
   const toNew = daysToNewMoon()
@@ -32,7 +38,7 @@ export default function App() {
   }
 
   return (
-    <div className={tutorial ? 'app with-panel' : 'app'}>
+    <div className={panel ? 'app with-panel' : 'app'}>
       <header className="sky">
         <span className="moon">{moonGlyph(phase)}</span>
         <h1>LUNARY</h1>
@@ -42,7 +48,16 @@ export default function App() {
           {toNew === 0 ? 'new moon tonight' : `${toNew}d to the new moon`} ·{' '}
           {cycles.length} cycle{cycles.length === 1 ? '' : 's'} chronicled
         </div>
-        <button className="ghost" onClick={() => setTutorial(true)}>
+        <button
+          className="ghost"
+          onClick={() => setPanel(panel === 'moonbook' ? null : 'moonbook')}
+        >
+          📖 Moonbook{readingCount > 0 && ` · ${readingCount}`}
+        </button>
+        <button
+          className="ghost"
+          onClick={() => setPanel(panel === 'tutorial' ? null : 'tutorial')}
+        >
           How to play
         </button>
         <button className="primary" onClick={begin}>
@@ -83,7 +98,7 @@ export default function App() {
           <button
             className="ghost"
             style={{ marginTop: '0.8rem' }}
-            onClick={() => setTutorial(true)}
+            onClick={() => setPanel('tutorial')}
           >
             New here? Read how to play →
           </button>
@@ -92,7 +107,8 @@ export default function App() {
 
       {open && <ProjectDetail id={open} onClose={() => setOpen(null)} />}
       {ritual && <InvocationStepper onClose={() => setRitual(false)} />}
-      {tutorial && <Tutorial onClose={() => setTutorial(false)} />}
+      {panel === 'tutorial' && <Tutorial onClose={() => setPanel(null)} />}
+      {panel === 'moonbook' && <Moonbook onClose={() => setPanel(null)} />}
     </div>
   )
 }

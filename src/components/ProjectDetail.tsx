@@ -3,11 +3,17 @@ import { useGarden } from '../store'
 import { ITCHES } from '../content/itches'
 import { PHASE_LABEL, isoDate, legalMoves, prettyDate } from '../lib/rules'
 import { ItchCard } from './GameCard'
+import { ReadingView } from './ReadingView'
+import { readingsFor } from '../lib/history'
 import type { Itch } from '../types'
 
 export function ProjectDetail({ id, onClose }: { id: string; onClose: () => void }) {
-  const { projects, updateProject, movePhase, moveZone, strikeMoonpenny, appendChronicle } = useGarden()
+  const {
+    projects, cycles, activeCycle,
+    updateProject, movePhase, moveZone, strikeMoonpenny, appendChronicle,
+  } = useGarden()
   const p = projects.find((x) => x.id === id)
+  const readings = readingsFor(id, cycles, activeCycle)
   const [itch, setItch] = useState<Itch | null>(null)
   const [pennyNote, setEchoNote] = useState('')
 
@@ -122,6 +128,24 @@ export function ProjectDetail({ id, onClose }: { id: string; onClose: () => void
               Strike a moonpenny
             </button>
           </div>
+        </div>
+
+        <div className="panel">
+          <h3>
+            Readings{' '}
+            <span className="hint">
+              · {readings.length} visit{readings.length === 1 ? '' : 's'} from the deck
+            </span>
+          </h3>
+          {readings.length === 0 ? (
+            <div className="hint">
+              No spirit has visited yet. The first Invocation brings one.
+            </div>
+          ) : (
+            readings.map((r, i) => (
+              <ReadingView key={`${r.cycle}-${i}`} record={r} defaultOpen={i === 0} />
+            ))
+          )}
         </div>
 
         <div className="panel">

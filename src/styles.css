@@ -243,6 +243,39 @@ header.sky .spacer { flex: 1; }
   .sidepanel { width: min(var(--panel-w), 92vw); box-shadow: -24px 0 70px #000c; }
 }
 
+/* ---- Past readings (Moonbook + project card) ---- */
+.cycle-head {
+  font-size: 0.75rem; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--gold); border-bottom: 1px solid var(--edge);
+  padding-bottom: 0.35rem; margin-bottom: 0.6rem;
+}
+
+.reading {
+  border: 1px solid var(--edge); border-radius: 8px;
+  margin-bottom: 0.6rem; overflow: hidden;
+  background: #11142a80;
+}
+.reading.open { border-color: #6b4a9e; background: #14112acc; }
+
+.reading-head {
+  display: flex; align-items: baseline; gap: 0.6rem; width: 100%;
+  background: transparent; border: none; border-radius: 0;
+  padding: 0.6rem 0.75rem; text-align: left; font-size: 0.88rem;
+}
+.reading-head:hover { background: #1b2140; border-color: transparent; }
+.reading-cycle { color: var(--gold); font-size: 0.75rem; flex-shrink: 0; }
+.reading-title { flex: 1; color: var(--cream); }
+.reading-chevron { color: var(--ink-dim); font-size: 1rem; flex-shrink: 0; }
+
+.reading-invitation {
+  padding: 0 0.75rem 0.6rem; font-size: 0.8rem; color: var(--ink-dim);
+  margin-top: -0.25rem;
+}
+.reading-body { padding: 0.5rem 0.75rem 0.75rem; }
+.reading-body .deck-row { margin-bottom: 0.9rem; }
+.reading-body .gcard { width: 175px; min-height: 270px; }
+.reading-body .panel { margin-bottom: 0; }
+
 /* ---- Tutorial type scale ---- */
 .tutorial { font-size: 1.06rem; line-height: 1.62; }
 .tutorial .panel p { margin: 0 0 0.85rem; font-size: 1.04rem; }
