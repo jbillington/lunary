@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { ReadingRecord } from '../lib/history'
 import { drawNote, planetOf, spiritOf } from '../lib/history'
-import { DAY_LABEL, prettyDate } from '../lib/rules'
+import { prettyDate } from '../lib/rules'
 import { moonGlyph } from '../lib/moon'
 import { PlanetCard, SpiritCard } from './GameCard'
 
@@ -64,7 +64,7 @@ export function ReadingView({
             <div className="field">
               <div className="label">Scheduled</div>
               <div>
-                {DAY_LABEL[reading.scheduledDay]}, {prettyDate(reading.scheduledDate)}
+                {prettyDate(reading.scheduledDate)}
               </div>
             </div>
             <div className="field" style={{ marginBottom: 0 }}>

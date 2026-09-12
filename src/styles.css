@@ -84,14 +84,110 @@ header.sky .spacer { flex: 1; }
   padding: 1rem 1.5rem; margin: 0 auto 1.75rem; max-width: 640px;
 }
 
-/* ---- The mat ----
-   auto-fit so the zones reflow whether the squeeze comes from a small viewport
-   or from the docked side panel taking its share. */
+/* ---- The garden map ---- */
+.map {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  border: 1px solid var(--edge);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: inset 0 0 90px #0009;
+}
+.map-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* Place plaques sit above their lantern. */
+.place {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  margin-top: -18px;
+  text-align: center;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.place-title {
+  font-size: 0.82rem; letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--cream); text-shadow: 0 2px 10px #000, 0 0 22px #000;
+}
+.place-count {
+  margin-left: 0.4rem; color: var(--gold); font-size: 0.75rem;
+}
+.place-blurb {
+  font-size: 0.68rem; font-style: italic; color: var(--ink-dim);
+  text-shadow: 0 2px 8px #000;
+}
+
+/* ---- Project tokens: a plant standing on the map ---- */
+.token {
+  position: absolute;
+  transform: translate(-50%, -62%);
+  background: none; border: none; padding: 0.2rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
+  cursor: pointer;
+  animation: sway 6.5s ease-in-out infinite;
+  transition: filter 0.18s, transform 0.18s;
+  filter: drop-shadow(0 6px 10px #000a);
+}
+.token:hover {
+  background: none; border: none;
+  transform: translate(-50%, -68%) scale(1.09);
+  filter: drop-shadow(0 0 16px #e3b23c88) drop-shadow(0 6px 10px #000a);
+  z-index: 5;
+}
+@keyframes sway {
+  0%, 100% { rotate: -1.6deg }
+  50%      { rotate: 1.6deg }
+}
+@media (prefers-reduced-motion: reduce) {
+  .token { animation: none }
+}
+
+.token-name {
+  font-size: 0.74rem; color: var(--cream); max-width: 106px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  text-shadow: 0 2px 8px #000, 0 0 14px #000;
+}
+.token-pennies { font-size: 0.64rem; color: #c9cfe0; letter-spacing: -1px; margin-top: -2px; }
+
+/* ---- The vault's seed packets ---- */
+.vault-slips {
+  position: absolute; transform: translate(-50%, 0);
+  display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: center;
+  width: 220px;
+}
+.packet {
+  background: none; border: none; padding: 0.15rem;
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer; transition: transform 0.16s, filter 0.16s;
+  filter: drop-shadow(0 4px 8px #000a);
+}
+.packet:hover:not(:disabled) {
+  background: none; transform: translateY(-4px);
+  filter: drop-shadow(0 0 12px #6fae8288) drop-shadow(0 4px 8px #000a);
+}
+.packet:disabled { opacity: 0.45; cursor: not-allowed; }
+.packet-name {
+  font-size: 0.66rem; color: var(--ink-dim); max-width: 64px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.vault-empty { font-size: 0.68rem; color: #4d5478; font-style: italic; }
+
+.map-legend {
+  position: absolute; left: 0; right: 0; bottom: 0.5rem;
+  text-align: center; font-size: 0.7rem; color: var(--ink-dim);
+  pointer-events: none; text-shadow: 0 1px 6px #000;
+}
+
+/* ---- The list view (fallback / dense mode) ---- */
 .mat {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
   gap: 0.9rem;
 }
+
+.view-toggle { display: flex; gap: 0.35rem; justify-content: flex-end; margin-bottom: 0.6rem; }
+.view-toggle button { padding: 0.3rem 0.7rem; font-size: 0.78rem; }
+.view-toggle button.on { background: var(--indigo); border-color: var(--indigo); color: #fff; }
 
 .zone {
   background: linear-gradient(180deg, var(--night-2), #11142a);

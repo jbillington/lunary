@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useGarden } from './store'
 import { Mat } from './components/Mat'
+import { GardenMap } from './components/GardenMap'
 import { ProjectDetail } from './components/ProjectDetail'
 import { InvocationStepper } from './components/InvocationStepper'
 import { Tutorial } from './components/Tutorial'
@@ -18,6 +19,7 @@ export default function App() {
   const [panel, setPanel] = useState<Panel>(null)
   const [slipName, setSlipName] = useState('')
   const [slipLine, setSlipLine] = useState('')
+  const [view, setView] = useState<'map' | 'list'>('map')
 
   const readingCount = timeline(cycles, activeCycle).length
 
@@ -45,7 +47,7 @@ export default function App() {
         <div className="spacer" />
         <div className="meta">
           {moonName(phase)} · {prettyDate(isoDate())} ·{' '}
-          {toNew === 0 ? 'new moon tonight' : `${toNew}d to the new moon`} ·{' '}
+          {moonName(phase) === 'New Moon' ? 'new moon tonight' : `${toNew}d to the new moon`} ·{' '}
           {cycles.length} cycle{cycles.length === 1 ? '' : 's'} chronicled
         </div>
         <button
@@ -70,7 +72,16 @@ export default function App() {
         Let each project become more itself.
       </p>
 
-      <Mat onOpen={setOpen} />
+      <div className="view-toggle">
+        <button className={view === 'map' ? 'on' : ''} onClick={() => setView('map')}>
+          🗺 Map
+        </button>
+        <button className={view === 'list' ? 'on' : ''} onClick={() => setView('list')}>
+          ▤ List
+        </button>
+      </div>
+
+      {view === 'map' ? <GardenMap onOpen={setOpen} /> : <Mat onOpen={setOpen} />}
 
       <form
         onSubmit={newSlip}

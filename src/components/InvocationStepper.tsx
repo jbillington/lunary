@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useGarden } from '../store'
 import type { Draw } from '../lib/rules'
 import {
-  DAY_LABEL, HANDS_LIMIT, MAX_DRAWS, PHASE_LABEL,
+  HANDS_LIMIT, MAX_DRAWS, PHASE_LABEL,
   bedsFree, drawFor, isoDate, legalMoves, nextDayOccurrence, prettyDate,
 } from '../lib/rules'
 import { PlanetCard, SpiritCard } from './GameCard'
@@ -314,7 +314,6 @@ export function InvocationStepper({ onClose }: { onClose: () => void }) {
                   <div className="field">
                     <div className="label">Scheduled — the spirit's planetary day</div>
                     <div>
-                      {DAY_LABEL[ds.draw.spirit.day]},{' '}
                       {prettyDate(isoDate(nextDayOccurrence(ds.draw.spirit.day)))}
                     </div>
                   </div>
@@ -360,7 +359,7 @@ export function InvocationStepper({ onClose }: { onClose: () => void }) {
                   <h3>{p?.name}</h3>
                   <div className="hint">{r.invitation}</div>
                   <div className="sealed" style={{ fontSize: '0.85rem', marginTop: '0.4rem' }}>
-                    {DAY_LABEL[r.scheduledDay]}, {prettyDate(r.scheduledDate)}
+                    {prettyDate(r.scheduledDate)}
                   </div>
                 </div>
               )
