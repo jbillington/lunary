@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { ChronicleEntry, Cycle, Echo, Phase, Project, Reading, SeedSlip, Zone } from './types'
+import type { ChronicleEntry, Cycle, Moonpenny, Phase, Project, Reading, SeedSlip, Zone } from './types'
 import { HANDS_LIMIT, canMoveTo, isoDate, tendedCount } from './lib/rules'
 import { moonPhase } from './lib/moon'
 
@@ -23,7 +23,7 @@ export interface GardenState {
   updateProject: (id: string, patch: Partial<Project>) => void
   moveZone: (id: string, zone: Zone) => boolean
   movePhase: (id: string, phase: Phase) => boolean
-  addEcho: (id: string, echo: Echo) => void
+  strikeMoonpenny: (id: string, penny: Moonpenny) => void
   appendChronicle: (id: string, entry: ChronicleEntry) => void
 
   beginInvocation: () => void
@@ -34,6 +34,36 @@ export interface GardenState {
 
 const uid = (prefix: string) =>
   `${prefix}${Math.random().toString(36).slice(2, 9)}`
+
+const STORE_KEY = 'lunary-v1'
+
+// The game was called The Night Garden before it was called Lunary, and what are
+// now moonpennies were called echoes. Carry an existing save across both renames
+// rather than orphaning it — losing a chronicle would be a poor joke in a game
+// whose whole premise is that the chronicle is permanent.
+function migrateLegacySave() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY) ?? localStorage.getItem('night-garden-v1')
+    if (!raw) return
+    const parsed = JSON.parse(raw)
+    const projects = parsed?.state?.projects
+    if (!Array.isArray(projects)) return
+    let changed = false
+    for (const p of projects) {
+      if (!Array.isArray(p.moonpennies)) {
+        p.moonpennies = Array.isArray(p.echoes) ? p.echoes : []
+        delete p.echoes
+        changed = true
+      }
+    }
+    if (changed || !localStorage.getItem(STORE_KEY)) {
+      localStorage.setItem(STORE_KEY, JSON.stringify(parsed))
+    }
+  } catch {
+    // unparseable or storage disabled — start fresh rather than throw
+  }
+}
+migrateLegacySave()
 
 export const useGarden = create<GardenState>()(
   persist(
@@ -69,7 +99,7 @@ export const useGarden = create<GardenState>()(
               phase: 'seed',
               test: '',
               signal: '',
-              echoes: [],
+              moonpennies: [],
               lastSpirit: null,
               chronicle: [],
               created: isoDate(),
@@ -86,7 +116,7 @@ export const useGarden = create<GardenState>()(
             {
               id: uid('p'), name, purpose, targetUser,
               zone: tendedCount(s.projects) < HANDS_LIMIT ? 'garden' : 'conservatory',
-              phase: 'seed', test: '', signal: '', echoes: [],
+              phase: 'seed', test: '', signal: '', moonpennies: [],
               lastSpirit: null, chronicle: [], created: isoDate(),
             },
           ],
@@ -133,10 +163,10 @@ export const useGarden = create<GardenState>()(
         return true
       },
 
-      addEcho: (id, echo) =>
+      strikeMoonpenny: (id, penny) =>
         set((s) => ({
           projects: s.projects.map((p) =>
-            p.id === id ? { ...p, echoes: [...p.echoes, echo] } : p,
+            p.id === id ? { ...p, moonpennies: [...p.moonpennies, penny] } : p,
           ),
         })),
 
@@ -182,6 +212,6 @@ export const useGarden = create<GardenState>()(
 
       reset: () => set({ projects: [], seedSlips: [], cycles: [], activeCycle: null }),
     }),
-    { name: 'night-garden-v1' },
+    { name: STORE_KEY },
   ),
 )

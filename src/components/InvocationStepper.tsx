@@ -118,7 +118,7 @@ export function InvocationStepper({ onClose }: { onClose: () => void }) {
         {step === 'review' && (
           <>
             <h2>Review the garden</h2>
-            <div className="sub">Look at every zone. Recall last cycle's echoes.</div>
+            <div className="sub">Look at every zone. Count last cycle's moonpennies.</div>
 
             {projects.length === 0 && (
               <p className="empty">
@@ -136,14 +136,14 @@ export function InvocationStepper({ onClose }: { onClose: () => void }) {
                 </h3>
                 <div className="hint">{p.purpose || <em>no purpose written yet</em>}</div>
                 <div style={{ marginTop: '0.5rem' }}>
-                  <span className="label">Echoes</span>{' '}
-                  {p.echoes.length === 0 ? (
+                  <span className="label">Moonpennies</span>{' '}
+                  {p.moonpennies.length === 0 ? (
                     <span className="hint">none yet — that is a measurement, not a failure</span>
                   ) : (
-                    <span className="sealed">
-                      {'★'.repeat(p.echoes.length)}{' '}
+                    <span className="pennies">
+                      {'◎'.repeat(p.moonpennies.length)}{' '}
                       <span className="hint">
-                        last: {p.echoes[p.echoes.length - 1].note}
+                        last: {p.moonpennies[p.moonpennies.length - 1].note}
                       </span>
                     </span>
                   )}

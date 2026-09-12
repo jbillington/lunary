@@ -114,7 +114,9 @@ header.sky .spacer { flex: 1; }
 .pcard .name { font-weight: 600; font-size: 0.95rem; }
 .pcard .purpose { font-size: 0.76rem; color: #5c5768; line-height: 1.35; }
 .pcard .row { display: flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem; font-size: 0.72rem; color: #6b6578; }
-.pcard .stars { color: #b8860b; letter-spacing: -1px; }
+/* Moonpennies — the translucent silver seedpods of Lunaria. */
+.pcard .pennies { color: #8d93a8; letter-spacing: -1px; }
+.pennies { color: #b9c0d6; }
 
 .slip {
   background: #1a1f3d; border: 1px dashed #3d4570; border-radius: 5px;

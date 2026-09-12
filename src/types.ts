@@ -1,4 +1,4 @@
-// The Night Garden — domain types.
+// Lunary — domain types.
 // These exist so the rules can be enforced by the compiler as well as the code.
 
 export type Phase = 'seed' | 'waxing' | 'full' | 'waning' | 'resting'
@@ -40,7 +40,11 @@ export interface Itch {
   provocation: string
 }
 
-export interface Echo {
+/**
+ * A moonpenny — struck onto a project each time the world answers it.
+ * Only the world mints these; effort alone never earns one.
+ */
+export interface Moonpenny {
   date: string        // ISO yyyy-mm-dd
   type: 'usage' | 'payment' | 'feedback' | 'return'
   note: string
@@ -61,7 +65,7 @@ export interface Project {
   phase: Phase
   test: string
   signal: string
-  echoes: Echo[]
+  moonpennies: Moonpenny[]
   /** Enforces the No-Repeat rule. */
   lastSpirit: string | null
   chronicle: ChronicleEntry[]

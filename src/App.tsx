@@ -35,7 +35,7 @@ export default function App() {
     <div className={tutorial ? 'app with-panel' : 'app'}>
       <header className="sky">
         <span className="moon">{moonGlyph(phase)}</span>
-        <h1>THE NIGHT GARDEN</h1>
+        <h1>LUNARY</h1>
         <div className="spacer" />
         <div className="meta">
           {moonName(phase)} · {prettyDate(isoDate())} ·{' '}

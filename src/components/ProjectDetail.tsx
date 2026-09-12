@@ -6,10 +6,10 @@ import { ItchCard } from './GameCard'
 import type { Itch } from '../types'
 
 export function ProjectDetail({ id, onClose }: { id: string; onClose: () => void }) {
-  const { projects, updateProject, movePhase, moveZone, addEcho, appendChronicle } = useGarden()
+  const { projects, updateProject, movePhase, moveZone, strikeMoonpenny, appendChronicle } = useGarden()
   const p = projects.find((x) => x.id === id)
   const [itch, setItch] = useState<Itch | null>(null)
-  const [echoNote, setEchoNote] = useState('')
+  const [pennyNote, setEchoNote] = useState('')
 
   if (!p) return null
 
@@ -91,29 +91,35 @@ export function ProjectDetail({ id, onClose }: { id: string; onClose: () => void
         </div>
 
         <div className="panel">
-          <h3>Echo log {p.echoes.length > 0 && <span className="sealed">{'★'.repeat(p.echoes.length)}</span>}</h3>
+          <h3>
+            Moonpennies{' '}
+            {p.moonpennies.length > 0 && (
+              <span className="pennies">{'◎'.repeat(p.moonpennies.length)}</span>
+            )}
+          </h3>
           <div className="hint" style={{ marginBottom: '0.6rem' }}>
-            A stranger used it · someone paid · unsolicited feedback · a returning user.
+            One for each time the world answered: a stranger used it · someone paid ·
+            unsolicited feedback · a returning user.
           </div>
-          {p.echoes.map((e, i) => (
+          {p.moonpennies.map((e, i) => (
             <div key={i} style={{ fontSize: '0.82rem' }}>
-              <span className="sealed">★</span> {prettyDate(e.date)} — {e.note}
+              <span className="pennies">◎</span> {prettyDate(e.date)} — {e.note}
             </div>
           ))}
           <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.7rem' }}>
             <input
               placeholder="what happened in the real world?"
-              value={echoNote}
+              value={pennyNote}
               onChange={(e) => setEchoNote(e.target.value)}
             />
             <button
-              disabled={!echoNote.trim()}
+              disabled={!pennyNote.trim()}
               onClick={() => {
-                addEcho(id, { date: isoDate(), type: 'usage', note: echoNote.trim() })
+                strikeMoonpenny(id, { date: isoDate(), type: 'usage', note: pennyNote.trim() })
                 setEchoNote('')
               }}
             >
-              Place echo
+              Strike a moonpenny
             </button>
           </div>
         </div>

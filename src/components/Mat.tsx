@@ -17,7 +17,7 @@ function ProjectTile({ p, onOpen }: { p: Project; onOpen: () => void }) {
       <div className="purpose">{p.purpose}</div>
       <div className="row">
         <span>{PHASE_LABEL[p.phase]}</span>
-        {p.echoes.length > 0 && <span className="stars">{'★'.repeat(p.echoes.length)}</span>}
+        {p.moonpennies.length > 0 && <span className="pennies">{'◎'.repeat(p.moonpennies.length)}</span>}
         {p.chronicle.length > 0 && <span>· {p.chronicle.length}c</span>}
       </div>
     </button>

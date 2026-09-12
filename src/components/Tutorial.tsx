@@ -35,6 +35,11 @@ export function Tutorial({ onClose }: { onClose: () => void }) {
               You are the gardener and the reader. The work is tending: season after
               season, letting each project become more itself.
             </p>
+            <p className="hint">
+              A <em>lunary</em> is a medieval moonbook — a book of prognostication
+              organized by the thirty days of the moon's cycle, telling you what to
+              undertake on each: when to travel, when to trade, when to plant.
+            </p>
           </div>
 
           <div className="panel">
@@ -135,15 +140,21 @@ export function Tutorial({ onClose }: { onClose: () => void }) {
           </div>
 
           <div className="panel">
-            <h3>Echoes, and what "winning" means</h3>
+            <h3>Moonpennies, and what "winning" means</h3>
             <p>
-              Open any project card and you'll find the <strong>echo log</strong>. An echo
-              is a real-world signal: a stranger used it, someone paid, someone wrote back
-              unprompted, a user returned. Add one star per signal.
+              <em>Lunaria</em> — the moon-plant — makes translucent silver seedpods that
+              growers call <strong>moonpennies</strong>. Each one is a coin and a seed
+              packet at the same time.
             </p>
             <p>
-              Echoes don't pass or fail a project — they tell you which way it wants to
-              grow. No echoes is a measurement, not a verdict.
+              Open any project and you'll find its moonpennies. You strike one every time
+              the world answers: a stranger used it, someone paid, someone wrote back
+              unprompted, a user returned. They are the only currency here, and the world
+              mints them, not you.
+            </p>
+            <p>
+              Moonpennies don't pass or fail a project — they tell you which way it wants
+              to grow. None yet is a measurement, not a verdict.
             </p>
             <p className="hint">
               There is no score and no end state. The garden is healthy when a real product
