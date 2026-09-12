@@ -1,0 +1,37 @@
+ARTWORK AND GAME TEXT — ALL RIGHTS RESERVED
+
+Copyright (c) 2026 John Billington. All rights reserved.
+
+This notice covers everything in this repository that is not source code:
+
+  • All card artwork, illustration, iconography, and visual design assets,
+    including any present or future contents of src/art/.
+  • The game text: the rules, card names, card text, ceremony language, and
+    written design contained in SPEC.md and rendered in the application.
+  • The name "Lunary" and the visual identity of the game.
+
+No licence is granted. You may not reproduce, distribute, adapt, publicly
+display, or create derivative works from these materials without prior
+written permission.
+
+Permitted without asking:
+
+  • Running this software for your own personal use, including playing the
+    game as a private individual.
+  • Quoting short excerpts for review, criticism, commentary, or reporting,
+    with attribution, as permitted by fair use / fair dealing.
+
+Not permitted without written permission:
+
+  • Publishing a printed or digital deck using this artwork or card text.
+  • Selling, or distributing as part of any commercial product or service.
+  • Publishing modified or re-illustrated versions of the cards.
+  • Training machine learning models on the artwork.
+
+The source code is separately licensed under the MIT License; see LICENSE.
+
+Game mechanics are generally not protectable by copyright. This notice
+reserves rights in the specific expression — the illustrations and the
+wording — and does not claim the underlying game design.
+
+For permissions, contact the copyright holder.

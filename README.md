@@ -55,6 +55,22 @@ npm run typecheck
   *ritual* holds, which 3 cards test as well as 16. The No-Repeat filter has a guard so
   a tiny deck can't empty the pool.
 
+## Licence
+
+Three parts, because a repository like this holds three different kinds of thing:
+
+| | Licence | |
+|---|---|---|
+| **Source code** | [MIT](./LICENSE) | Use it, fork it, sell it — go ahead |
+| **Card artwork** | [All rights reserved](./LICENSE-ART) | No licence granted |
+| **Game text** — rules, card text, SPEC.md | [All rights reserved](./LICENSE-ART) | No licence granted |
+
+Playing the game privately is fine. Publishing a deck using this art or card text is not.
+
+Note that **game mechanics are not copyrightable** in most jurisdictions — anyone may
+implement a Hands Limit or a Planet + Spirit draw. What is reserved is the specific
+expression: the illustrations and the wording.
+
 ## Not yet built
 
 Communion stepper (F4) · cycle history view (F7) · once-per-cycle Itch limit
