@@ -67,10 +67,6 @@ Three parts, because a repository like this holds three different kinds of thing
 
 Playing the game privately is fine. Publishing a deck using this art or card text is not.
 
-Note that **game mechanics are not copyrightable** in most jurisdictions — anyone may
-implement a Hands Limit or a Planet + Spirit draw. What is reserved is the specific
-expression: the illustrations and the wording.
-
 ## Not yet built
 
 Communion stepper (F4) · cycle history view (F7) · once-per-cycle Itch limit
